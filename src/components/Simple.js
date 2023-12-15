@@ -15,10 +15,42 @@ import {
   VisuallyHidden,
   List,
   ListItem,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Center,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
+import CardProject from "./CardProject";
 
+const data1 = [
+  {
+    title: "Sketches",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+  {
+    title: "UI/UX Design",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+  {
+    title: "Product Design",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+  {
+    title: "App Design",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+  {
+    title: "Motion Graphics",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+  {
+    title: "Responsive Design",
+    desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
+  },
+];
 export default function Simple() {
   return (
     <Container maxW={"7xl"}>
@@ -32,7 +64,7 @@ export default function Simple() {
             rounded={"md"}
             alt={"product image"}
             src={
-              "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080"
+              "https://thumbs.dreamstime.com/b/cartoon-avatar-man-front-view-graphic-brown-hair-wearing-eyeglasses-over-isolated-background-illustration-73243082.jpg"
             }
             fit={"cover"}
             align={"center"}
@@ -47,14 +79,14 @@ export default function Simple() {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              AFFILIATE.ID
+              CREATIVE PORTFOLIO
             </Heading>
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={300}
               fontSize={"2xl"}
             >
-              https://app.affiliate.id/
+              Hi,iam Ronald Adriansyah
             </Text>
           </Box>
 
@@ -73,11 +105,13 @@ export default function Simple() {
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
-                affiliate.id is more than just affiliate marketing. Diversify
-                your partner mix to drive new revenue now.
+                A professional with more than 15 years of relevant work
+                experience in Web Developer,Fullstack & Desktop Programmer,I
+                also make website more & more interactive.
               </Text>
             </VStack>
             <Box>
+              {/* <CardProject /> */}
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
                 color={useColorModeValue("yellow.500", "yellow.300")}
@@ -104,8 +138,44 @@ export default function Simple() {
           </Stack>
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
             <MdLocalShipping />
-            <Text>2-3 business days delivery</Text>
+            <Text>1-7 business days</Text>
           </Stack>
+        </Stack>
+      </SimpleGrid>
+
+      <Center>
+        <Text fontSize="4xl" Bold>
+          SERVICE
+        </Text>
+      </Center>
+
+      <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 8, md: 10 }}>
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[0]} />
+        </Stack>
+
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[1]} />
+        </Stack>
+
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[2]} />
+          {/* <Stack direction="row" alignItems="center" justifyContent={"center"}>
+            <MdLocalShipping />
+            <Text>1-7 business days</Text>
+          </Stack> */}
+        </Stack>
+
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[3]} />
+        </Stack>
+
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[4]} />
+        </Stack>
+
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <CardProject data={data1[5]} />
         </Stack>
       </SimpleGrid>
     </Container>

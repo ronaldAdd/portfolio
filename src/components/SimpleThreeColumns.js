@@ -1,154 +1,270 @@
+import React, { ReactNode, useState } from "react";
+
 import {
+  IconButton,
+  Avatar,
+  Box,
+  CloseButton,
   Flex,
-  Stack,
-  Heading,
-  Text,
-  Input,
-  Button,
+  HStack,
+  VStack,
   Icon,
   useColorModeValue,
-  createIcon,
-  Image,
+  Link,
+  Drawer,
+  DrawerContent,
+  Text,
+  useDisclosure,
+  BoxProps,
+  FlexProps,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
+import {
+  FiHome,
+  FiTrendingUp,
+  FiCompass,
+  FiStar,
+  FiSettings,
+  FiMenu,
+  FiBell,
+  FiChevronDown,
+} from "react-icons/fi";
+import { IconType } from "react-icons";
+import { ReactText } from "react";
 import Simple from "./Simple";
-import SimpleSidebar from "./SimpleSidebar";
-export default function CardWithIllustration() {
+import SplitWithImage from "./SplitWithImage";
+// import SignIn from "../Components/SignIn";
+// import Products from "../Components/Products";
+// import BasicStatistics from "./BasicStatistics";
+import { useNavigate } from "react-router-dom";
+
+// import Charts from "./Charts";
+interface LinkItemProps {
+  name: string;
+  icon: IconType;
+}
+
+const LinkItems: Array<LinkItemProps> = [
+  { name: "Home", icon: FiHome, url: "" },
+  { name: "Employment History", icon: FiTrendingUp, url: "" },
+  {
+    name: "Websites & Social Links",
+    icon: FiCompass,
+    url: "",
+  },
+  { name: "Skills", icon: FiStar, url: "" },
+  { name: "Courses", icon: FiSettings, url: "" },
+  { name: "My achievements", icon: FiSettings, url: "" },
+];
+
+export default function SimpleSidebar({ children }: { children: ReactNode }) {
+  console.log(children, "children");
+  const [menu, setMenu] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      py={12}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack
-        boxShadow={"2xl"}
-        bg={useColorModeValue("white", "gray.700")}
-        rounded={"xl"}
-        p={10}
-        spacing={8}
-        align={"center"}
+    <Box minH="100vh" bg={useColorModeValue("white", "blueviolet")}>
+      <SidebarContent
+        onClose={() => onClose}
+        display={{ base: "none", md: "block" }}
+      />
+      <Drawer
+        autoFocus={false}
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        size="full"
       >
-        {/* <Icon as={NotificationIcon} w={24} h={24} /> */}
-        <Image
-          borderRadius="full"
-          boxSize="150px"
-          src="https://bit.ly/dan-abramov"
-          alt="Dan Abramov"
-        />
-        <Stack align={"center"} spacing={2}>
-          <Heading
-            textTransform={"uppercase"}
-            fontSize={"3xl"}
-            color={useColorModeValue("gray.800", "gray.200")}
-          >
-            RONALD ADRIANSYAH
-          </Heading>
-          <Text fontSize={"lg"} color={"gray.500"}>
-            FULL STACK DEVELOPER
-          </Text>
-        </Stack>
-        <Stack spacing={4} direction={{ base: "column", md: "row" }} w={"full"}>
-          <Simple />
-        </Stack>
-      </Stack>
-    </Flex>
+        <DrawerContent>
+          <SidebarContent onClose={onClose} />
+        </DrawerContent>
+      </Drawer>
+      {/* mobilenav */}
+      <MobileNav onOpen={onOpen} />
+      <Box
+        ml={{ base: 0, md: 60 }}
+        p="4"
+        // backgroundImage={
+        //   "https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png"
+        // }
+        // backgroundSize={"contain"}
+      >
+        {children}
+        {/* <BasicStatistics data={({"id" : 'tes'})} /> */}
+        {/* <Charts /> */}
+        <Simple />
+        {/* <SplitWithImage /> */}
+      </Box>
+      tes
+    </Box>
   );
 }
 
-const NotificationIcon = createIcon({
-  displayName: "Notification",
-  viewBox: "0 0 128 128",
-  path: (
-    <g id="Notification">
-      <rect
-        className="cls-1"
-        x="1"
-        y="45"
-        fill={"#fbcc88"}
-        width="108"
-        height="82"
+interface SidebarProps extends BoxProps {
+  onClose: () => void;
+}
+
+const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const navigate = useNavigate();
+
+  return (
+    <Box
+      transition="3s ease"
+      bg={useColorModeValue("white", "gray.900")}
+      borderRight="1px"
+      borderRightColor={useColorModeValue("gray.200", "gray.700")}
+      w={{ base: "full", md: 60 }}
+      pos="fixed"
+      h="full"
+      {...rest}
+    >
+      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+          DICOD
+        </Text>
+        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+      </Flex>
+      {LinkItems.map((link) => (
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          onClick={() => navigate(`/${link.url}`)}
+        >
+          {link.name}
+        </NavItem>
+      ))}
+    </Box>
+  );
+};
+
+interface NavItemProps extends FlexProps {
+  icon: IconType;
+  children: ReactText;
+}
+const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+  return (
+    <Link
+      href="#"
+      style={{ textDecoration: "none" }}
+      _focus={{ boxShadow: "none" }}
+    >
+      <Flex
+        align="center"
+        p="4"
+        mx="4"
+        borderRadius="lg"
+        role="group"
+        cursor="pointer"
+        _hover={{
+          bg: "cyan.400",
+          color: "white",
+        }}
+        {...rest}
+      >
+        {icon && (
+          <Icon
+            mr="4"
+            fontSize="16"
+            _groupHover={{
+              color: "white",
+            }}
+            as={icon}
+          />
+        )}
+        {children}
+      </Flex>
+    </Link>
+  );
+};
+
+interface MobileProps extends FlexProps {
+  onOpen: () => void;
+}
+const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  return (
+    <Flex
+      ml={{ base: 0, md: 60 }}
+      px={{ base: 4, md: 4 }}
+      height="20"
+      alignItems="center"
+      bg={useColorModeValue("white", "gray.900")}
+      borderBottomWidth="1px"
+      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+      justifyContent={{ base: "space-between", md: "flex-end" }}
+      {...rest}
+    >
+      <IconButton
+        display={{ base: "flex", md: "none" }}
+        onClick={onOpen}
+        variant="outline"
+        aria-label="open menu"
+        icon={<FiMenu />}
       />
-      <circle className="cls-2" fill={"#8cdd79"} cx="105" cy="86" r="22" />
-      <rect
-        className="cls-3"
-        fill={"#f6b756"}
-        x="1"
-        y="122"
-        width="108"
-        height="5"
-      />
-      <path
-        className="cls-4"
-        fill={"#7ece67"}
-        d="M105,108A22,22,0,0,1,83.09,84a22,22,0,0,0,43.82,0A22,22,0,0,1,105,108Z"
-      />
-      <path
-        fill={"#f6b756"}
-        className="cls-3"
-        d="M109,107.63v4A22,22,0,0,1,83.09,88,22,22,0,0,0,109,107.63Z"
-      />
-      <path
-        className="cls-5"
-        fill={"#d6ac90"}
-        d="M93,30l16,15L65.91,84.9a16,16,0,0,1-21.82,0L1,45,17,30Z"
-      />
-      <path
-        className="cls-6"
-        fill={"#cba07a"}
-        d="M109,45,65.91,84.9a16,16,0,0,1-21.82,0L1,45l2.68-2.52c43.4,40.19,41.54,39.08,45.46,40.6A16,16,0,0,0,65.91,79.9l40.41-37.42Z"
-      />
-      <path
-        className="cls-7"
-        fill={"#dde1e8"}
-        d="M93,1V59.82L65.91,84.9a16,16,0,0,1-16.77,3.18C45.42,86.64,47,87.6,17,59.82V1Z"
-      />
-      <path
-        className="cls-8"
-        fill={"#c7cdd8"}
-        d="M74,56c-3.56-5.94-3-10.65-3-17.55a16.43,16.43,0,0,0-12.34-16,5,5,0,1,0-7.32,0A16,16,0,0,0,39,38c0,7.13.59,12-3,18a3,3,0,0,0,0,6H50.41a5,5,0,1,0,9.18,0H74a3,3,0,0,0,0-6ZM53.2,21.37a3,3,0,1,1,3.6,0,1,1,0,0,0-.42.7,11.48,11.48,0,0,0-2.77,0A1,1,0,0,0,53.2,21.37Z"
-      />
-      <path
-        className="cls-3"
-        fill={"#f6b756"}
-        d="M46.09,86.73,3,127H1v-1c6-5.62-1.26,1.17,43.7-40.78A1,1,0,0,1,46.09,86.73Z"
-      />
-      <path
-        className="cls-3"
-        fill={"#f6b756"}
-        d="M109,126v1h-2L63.91,86.73a1,1,0,0,1,1.39-1.49C111,127.85,103.11,120.51,109,126Z"
-      />
-      <path
-        className="cls-8"
-        fill={"#c7cdd8"}
-        d="M93,54.81v5L65.91,84.9a16,16,0,0,1-16.77,3.18C45.42,86.64,47,87.6,17,59.82v-5L44.09,79.9a16,16,0,0,0,21.82,0Z"
-      />
-      <path
-        className="cls-9"
-        fill={"#fff"}
-        d="M101,95c-.59,0-.08.34-8.72-8.3a1,1,0,0,1,1.44-1.44L101,92.56l15.28-15.28a1,1,0,0,1,1.44,1.44C100.21,96.23,101.6,95,101,95Z"
-      />
-      <path
-        className="cls-3"
-        fill={"#f6b756"}
-        d="M56.8,18.38a3,3,0,1,0-3.6,0A1,1,0,0,1,52,20,5,5,0,1,1,58,20,1,1,0,0,1,56.8,18.38Z"
-      />
-      <path
-        className="cls-1"
-        fill={"#fbcc88"}
-        d="M71,42.17V35.45c0-8.61-6.62-16-15.23-16.43A16,16,0,0,0,39,35c0,7.33.58,12-3,18H74A21.06,21.06,0,0,1,71,42.17Z"
-      />
-      <path
-        className="cls-3"
-        fill={"#f6b756"}
-        d="M74,53H36a21.36,21.36,0,0,0,1.86-4H72.14A21.36,21.36,0,0,0,74,53Z"
-      />
-      <path className="cls-3" fill={"#f6b756"} d="M59.59,59a5,5,0,1,1-9.18,0" />
-      <path
-        className="cls-1"
-        fill={"#fbcc88"}
-        d="M74,59H36a3,3,0,0,1,0-6H74a3,3,0,0,1,0,6Z"
-      />
-    </g>
-  ),
-});
+
+      <Text
+        display={{ base: "flex", md: "none" }}
+        fontSize="2xl"
+        fontFamily="monospace"
+        fontWeight="bold"
+      >
+        DICOD
+      </Text>
+
+      {/* <HStack spacing={{ base: "0", md: "6" }}>
+        <IconButton
+          size="lg"
+          variant="ghost"
+          aria-label="open menu"
+          icon={<FiBell />}
+        />
+        <Flex alignItems={"center"}>
+          <Menu>
+            <MenuButton
+              py={2}
+              transition="all 0.3s"
+              _focus={{ boxShadow: "none" }}
+            >
+              <HStack>
+                <Avatar
+                  size={"sm"}
+                  src={
+                    "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                  }
+                />
+                <VStack
+                  display={{ base: "none", md: "flex" }}
+                  alignItems="flex-start"
+                  spacing="1px"
+                  ml="2"
+                >
+                  <Text fontSize="sm">Ronald A</Text>
+                  <Text fontSize="xs" color="gray.600">
+                    Admin
+                  </Text>
+                </VStack>
+                <Box display={{ base: "none", md: "flex" }}>
+                  <FiChevronDown />
+                </Box>
+              </HStack>
+            </MenuButton>
+            <MenuList
+              bg={useColorModeValue("white", "gray.900")}
+              borderColor={useColorModeValue("gray.200", "gray.700")}
+            >
+              <MenuItem>Profile</MenuItem>
+              <MenuItem>Settings</MenuItem>
+              <MenuItem>Billing</MenuItem>
+              <MenuDivider />
+              <MenuItem>Sign out</MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+      </HStack> */}
+    </Flex>
+  );
+};
