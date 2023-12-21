@@ -6,11 +6,9 @@ import LargeWithLogoLeft from "../components/LargeWithLogoLeft";
 import ThreeTierPricingHorizontal from "../components/ThreeTierPricingHorizontal";
 import SplitWithImage from "../components/SplitWithImage";
 function UsersRoute(props) {
-  console.log("UsersRoute", props);
-
   return (
     <>
-      <SimpleThreeColumns />
+      <SimpleThreeColumns data={props} />
     </>
   );
 }

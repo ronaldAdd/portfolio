@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 
 import {
   IconButton,
@@ -22,6 +22,11 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Fade,
+  ScaleFade,
+  Slide,
+  SlideFade,
+  Collapse,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -41,6 +46,8 @@ import SplitWithImage from "./SplitWithImage";
 // import Products from "../Components/Products";
 // import BasicStatistics from "./BasicStatistics";
 import { useNavigate } from "react-router-dom";
+import EmployementHistory from "../router/EmployementHistory";
+import Skills from "../router/Skills";
 
 // import Charts from "./Charts";
 interface LinkItemProps {
@@ -49,27 +56,41 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome, url: "" },
-  { name: "Employment History", icon: FiTrendingUp, url: "" },
+  { name: "Home", icon: FiHome, url: "0" },
+  {
+    name: "Employment History",
+    icon: FiTrendingUp,
+    url: "1",
+  },
   {
     name: "Websites & Social Links",
     icon: FiCompass,
-    url: "",
+    url: "2",
   },
-  { name: "Skills", icon: FiStar, url: "" },
-  { name: "Courses", icon: FiSettings, url: "" },
-  { name: "My achievements", icon: FiSettings, url: "" },
+  { name: "Skills", icon: FiStar, url: "3" },
+  { name: "Courses", icon: FiSettings, url: "4" },
+  { name: "My achievements", icon: FiSettings, url: "5" },
 ];
 
-export default function SimpleSidebar({ children }: { children: ReactNode }) {
-  console.log(children, "children");
+export default function SimpleSidebar(
+  props,
+  { children }: { children: ReactNode }
+) {
   const [menu, setMenu] = useState("");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  const [activePage, setActivePage] = useState("");
+  console.log(props.data.data, "PROPS PARENT");
+  useEffect(() => {
+    console.log("MENU", activePage);
+  }, [activePage]);
+
   return (
     <Box minH="100vh" bg={useColorModeValue("white", "blueviolet")}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
+        setActivePage={setActivePage}
+        onToggle={onToggle}
       />
       <Drawer
         autoFocus={false}
@@ -95,10 +116,14 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
         // backgroundSize={"contain"}
       >
         {children}
-        {/* <BasicStatistics data={({"id" : 'tes'})} /> */}
-        {/* <Charts /> */}
-        <Simple />
-        {/* <SplitWithImage /> */}
+        {activePage === "1" ? (
+          <EmployementHistory user={props.data.data} />
+        ) : activePage === "3" ? (
+          <Skills user={props.data.data} />
+        ) : activePage === "4" ? null : activePage ===
+          "5" ? null : activePage === "2" ? null : (
+          <Simple user={props.data.data} />
+        )}
       </Box>
       tes
     </Box>
@@ -109,8 +134,19 @@ interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = (props, { onClose, ...rest }: SidebarProps) => {
   const navigate = useNavigate();
+  const [activePage, setActivePage] = useState("");
+  const isActive = props["setActivePage"];
+  console.log(props, "SidebarContent");
+
+  useEffect(() => {
+    if (isActive) {
+      isActive(activePage);
+
+      console.log(activePage, "ISACTIVE");
+    }
+  }, [activePage]);
 
   return (
     <Box
@@ -133,7 +169,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <NavItem
           key={link.name}
           icon={link.icon}
-          onClick={() => navigate(`/${link.url}`)}
+          onClick={() => setActivePage(`${link.url}`)}
         >
           {link.name}
         </NavItem>

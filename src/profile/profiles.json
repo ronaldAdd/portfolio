@@ -1,0 +1,93 @@
+{
+  "success": true,
+  "type": "user",
+  "jwt": "eyJhbGciOiJSUzI1NiJ9.eyJ0eXAiOiJ1c2VyIiwidWlkIjozMjM1NTIzNiwicGxuIjoiZnJlZSIsImV4cCI6MTcwMzE3ODY5MCwiaWF0IjoxNzAzMTc1MDkwfQ.j6G4LdPy9jXJ_iZKY05GIZMyjpcoWbVnSegSm-AoPTWBcuOnNOxsLNuvF241ED6YZqCoR7oOIxptkVQxAoePKq4zkfZJD4hZBUsTda64tr8_svSlHmnnTTQE905L5GelFjqHMVLXM51icAmwrC929iWVfZSyNSbQmx_RpEBXjCxE3GNxTyiO14-WkTiU5VmgAZcAvRqd0Fh9MNrMLWsoEbvSIsbonyyUN91ObmISq5-JudnReoIzBpAuAIpXFAA0cH0aKqcIVNMAmy_yeP-oV9yxbZtzsfOrLpuJwOatoBd7yFaBBZy7fxpnCmfPvIV__rJGScurIUfitVbGIncImH8_OSPJtej46AKfxn79_Hy_flv4w1KRvIYCEO7UULVYNj2jHg4czwppWn49fyiEApVBzMKuq-Ki5kj42BtgAzu8345dqzO6Y3yCkVYnl79D_rloOKYMDoSApHkR9DrvFCNrQT8PzyZ65n5KqVAsIV15N2tjP0e_Y9vkwiG5vh1YNhPZG9LGPXLcYIpvUBrGJr0ax91FzZpbwwaHYx3iyLRM6nyU0UQtrbN-uIiW_pOIXgPTrs02uLarnyOGGDHDfm3KYRqUMFLUT3bNLBWPNbfW3vZf5pfLsZ6nbrqH6uArEmcq4ECayxEnlMelaG2UQxE1VLk6hR3ajtFtNl_U9fs",
+  "jwtExpiresAt": "2023-12-21T18:11:30.000+01:00",
+  "user": {
+    "id": 32355236,
+    "socialAccount": false,
+    "careerId": null,
+    "email": "sschouse@gmail.com",
+    "profilePicture": {
+      "transform": {
+        "rect": {
+          "x": 0,
+          "y": 0.006003430531732357,
+          "width": 1,
+          "height": 0.9879931389365353
+        },
+        "zoom": 1,
+        "angle": 0,
+        "customBackground": {
+          "color": null,
+          "image": null
+        }
+      },
+      "largeUrl": "https://s3.resume.io/uploads/profile_picture/file/13026097/8242a74cd3ad4a58637f4281a84bc7ea.jpg?version=477f595aa",
+      "thumbUrl": "https://s3.resume.io/uploads/profile_picture/file/13026097/thumb_8242a74cd3ad4a58637f4281a84bc7ea.jpg?version=477f595aa",
+      "mediumUrl": "https://s3.resume.io/uploads/profile_picture/file/13026097/medium_squared_8242a74cd3ad4a58637f4281a84bc7ea.jpg?version=477f595aa",
+      "originalUrl": "https://s3.resume.io/uploads/profile_picture/original_file/13026097/9b6708c6800f8c18b09abeb543660c20.jpg",
+      "blank": false
+    },
+    "emailNotifications": {
+      "marketing": true,
+      "sharing": true,
+      "newsletter": false,
+      "career": false
+    },
+    "unconfirmedEmail": null,
+    "firstName": "Ronald",
+    "lastName": "Adriansyah",
+    "fullName": "Ronald Adriansyah",
+    "registeredAt": "2023-11-29T08:31:23.434+01:00",
+    "hasPremiumFeatures": false,
+    "billingStatus": "free",
+    "billingInfo": {
+      "subscriptionProvider": "stripe",
+      "upgradeUrl": "/app/billing/plans",
+      "cancelSubscriptionUrl": "/app/account/cancel-subscription/new",
+      "onTrial": false,
+      "cancelledAt": null,
+      "premiumEndsAt": null,
+      "nextPaymentAt": null,
+      "userType": "free",
+      "trialDays": 7,
+      "alreadyGotDiscountDuringSubCancellation": false
+    },
+    "socialProfiles": [
+      {
+        "uid": null,
+        "provider": "facebook",
+        "connected": false,
+        "connectionUrl": "/auth/facebook"
+      },
+      {
+        "uid": null,
+        "provider": "linkedin",
+        "connected": false,
+        "connectionUrl": "/auth/linkedin"
+      },
+      {
+        "uid": "112775482771342024019",
+        "provider": "google_oauth2",
+        "connected": true,
+        "connectionUrl": "/auth/google_oauth2",
+        "profileUrl": null,
+        "handle": "sschouse@gmail.com"
+      }
+    ],
+    "visitedPlans": true,
+    "announceEnabled": true,
+    "availableFreePeriod": null,
+    "availablePausePeriod": null,
+    "availableTopResumeReview": true,
+    "isRioPaidUser": false,
+    "aiClAttempts": null,
+    "isRioUser": true,
+    "subCancellationV3": "as_is",
+    "showCioPromoModal": true,
+    "smartBannerOrder": {},
+    "abandonmentModel": "without_new_functionality",
+    "linkedinUrl": null
+  }
+}

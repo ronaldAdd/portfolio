@@ -20,9 +20,11 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  VStack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
-
+import CardSkills from "./CardSkills";
 const options = [
   {
     id: 1,
@@ -46,7 +48,7 @@ interface PackageTierProps {
   typePlan: string;
   checked?: boolean;
 }
-const PackageTier = ({
+const SkillTier = ({
   title,
   options,
   typePlan,
@@ -64,12 +66,7 @@ const PackageTier = ({
   const bgColorDark = checked ? "purple.400" : "gray.300";
 
   return (
-    <Card
-      direction={{ base: "column", sm: "row" }}
-      overflow="hidden"
-      variant={"filled"}
-      bg={"white"}
-    >
+    <Card direction={{ base: "column", sm: "row" }} overflow="hidden">
       {/* <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "200px" }}
@@ -105,27 +102,16 @@ const PackageTier = ({
     </Card>
   );
 };
-const ThreeTierPricingHorizontal = (props) => {
-  console.log(props.data.user.workExperiences, "WORK");
+const Skills = (props) => {
+  console.log(props.data.user.skills, "SKILLS");
 
   return (
-    <Box py={6} px={5} min={"100vh"}>
-      <Stack spacing={4} width={"100%"} direction={"column"}>
-        {Object.assign([], props.data.user.workExperiences).map(
-          (item, index) => (
-            <PackageTier
-              title={item.title}
-              companyName={item.employer}
-              city={item.city}
-              job={item.description}
-              dateFrom={item.dateFrom}
-              dateUntil={item.dateUntil}
-            />
-          )
-        )}
-      </Stack>
-    </Box>
+    <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 8, md: 10 }}>
+      {Object.assign([], props.data.user.skills).map((item, index) => (
+        <CardSkills skill={item} />
+      ))}
+    </SimpleGrid>
   );
 };
 
-export default ThreeTierPricingHorizontal;
+export default Skills;

@@ -24,7 +24,7 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 import CardProject from "./CardProject";
-
+//"https://thumbs.dreamstime.com/b/cartoon-avatar-man-front-view-graphic-brown-hair-wearing-eyeglasses-over-isolated-background-illustration-73243082.jpg"
 const data1 = [
   {
     title: "Sketches",
@@ -51,9 +51,9 @@ const data1 = [
     desc: "Lorem ipsum dolor sittem ametamn elit, per sed do eiusmoad teimpor sittem elit inuning utsed sittem.",
   },
 ];
-export default function Simple() {
+export default function Simple(props) {
   return (
-    <Container maxW={"7xl"}>
+    <Container maxW={"7xl"} bg={"whitesmoke"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -61,15 +61,10 @@ export default function Simple() {
       >
         <Flex>
           <Image
-            rounded={"md"}
-            alt={"product image"}
-            src={
-              "https://thumbs.dreamstime.com/b/cartoon-avatar-man-front-view-graphic-brown-hair-wearing-eyeglasses-over-isolated-background-illustration-73243082.jpg"
-            }
+            borderRadius="full"
+            src={props.user.avatar.largeUrl}
             fit={"cover"}
             align={"center"}
-            w={"100%"}
-            h={{ base: "100%", sm: "400px", lg: "500px" }}
           />
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
@@ -86,7 +81,7 @@ export default function Simple() {
               fontWeight={300}
               fontSize={"2xl"}
             >
-              Hi,iam Ronald Adriansyah
+              Hi,iam {props.user.firstName} {props.user.lastName}
             </Text>
           </Box>
 
@@ -105,9 +100,7 @@ export default function Simple() {
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
-                A professional with more than 15 years of relevant work
-                experience in Web Developer,Fullstack & Desktop Programmer,I
-                also make website more & more interactive.
+                {props.user.profile}
               </Text>
             </VStack>
             <Box>
